@@ -437,37 +437,3 @@ tapply(BDD2010$Q2,BDD2010$Pays,mean)
 min(tapply(BDD2010$Q2,BDD2010$Pays,mean))
 max(tapply(BDD2010$Q2,BDD2010$Pays,mean))
 
-#_____________________________________________
-
-
-levels(BDD2010$Pays)
-continent = c("South America","Oceania","Europe","Europe","Europe","North America","South America","Asia","Europe","Europe","Europe","Europe","Europe","Europe","Europe","Asia",
-              "Asia","Asia","Europe","Europe","North America","Europe","Oceania","Europe","Asia","Europe","Asia","Europe","Europe","Africa","Europe","Europe","Europe","Europe","Europe","North America")
-BDD2010$Continent = BDD2010$Pays
-levels(BDD2010$Continent)= continent
-
-tapply(BDD2010$Q1,BDD2010$Continent,mean)
-min(tapply(BDD2010$Q1,BDD2010$Continent,mean))
-max(tapply(BDD2010$Q1,BDD2010$Continent,mean))
-
-tapply(BDD2010$Q2,BDD2010$Continent,mean)
-min(tapply(BDD2010$Q2,BDD2010$Continent,mean))
-max(tapply(BDD2010$Q2,BDD2010$Continent,mean))
-
-#Boxplot pour chaque continent
-par(mfrow = c(2,3))
-boxplot(Q1~Continent,data=BDD2010,main="Q1")
-boxplot(Q2~Continent,data=BDD2010,main="Q2")
-boxplot(Q3~Continent,data=BDD2010,main="Q3")
-boxplot(Q4~Continent,data=BDD2010,main="Q4")
-boxplot(Q5~Continent,data=BDD2010,main="Q5")
-boxplot(Q6~Continent,data=BDD2010,main="Q6")
-
-
-
-
-par(mfrow = c(2,2))
-barplot(table(BDD2010$Q7,BDD2010$Continent),legend=c("Y","N"),main="Diagramme en bande",ylab="Effectif Q7")
-barplot(table(BDD2010$Q8,BDD2010$Continent),legend=c("Y","N"),main="Diagramme en bande",ylab="Effectif Q8")
-barplot(table(BDD2010$Q9,BDD2010$Continent),legend=c("Y","N"),main="Diagramme en bande",ylab="Effectif Q9")
-barplot(table(BDD2010$Q10,BDD2010$Continent),legend=c("Y","N"),main="Diagramme en bande",ylab="Effectif Q10")
