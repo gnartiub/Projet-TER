@@ -1,0 +1,473 @@
+library(foreign)
+library(normtest)
+library(nortest)
+
+data1993 = read.dta("Environnement 1/ZA2450.dta")
+
+
+data2000 = read.dta("Environnement 2/ZA3440.dta")
+
+data2010 = read.dta("Environnement 3/ZA5500_v3-0-0.dta/ZA5500_v3-0-0.dta")
+
+#donnees 1993
+View(data1993)
+
+#2010 = 1993 = 
+#q12a = q8a = q2
+#q12b = q8b = q3
+#q12c = q8c = q4
+#q14a = q12a = q5
+#q20a = q19a = q6
+#q21 = q20 = q7
+#q22a = q21a = q8
+#q22b = q21b = q9
+#q22c = q21c = q10
+
+levels(data1993$v24)
+levels(data1993$v24) = c(1,2,3,4,5,8,9)
+Q2 = data1993$v24
+
+levels(data1993$v25)
+levels(data1993$v25) = c(1,2,3,4,5,8,9)
+Q3 = data1993$v25
+
+levels(data1993$v26)
+levels(data1993$v26) = c(1,2,3,4,5,8,9)
+Q4 = data1993$v26
+
+levels(data1993$v41)
+levels(data1993$v41) = c(1,2,3,4,5,8,9)
+Q5 = data1993$v41
+
+levels(data1993$v56)
+levels(data1993$v56) = c(1,2,3,4,5,8,9)
+Q6 = data1993$v56
+
+levels(data1993$v60)
+levels(data1993$v60) = c(1,2,8,9)
+Q7 = data1993$v60
+
+levels(data1993$v61)
+levels(data1993$v61) = c(1,2,8,9)
+Q8 = data1993$v61
+
+levels(data1993$v62)
+levels(data1993$v62) = c(0,1,2,8,9)
+Q9 = data1993$v62
+
+levels(data1993$v63)
+levels(data1993$v63) = c(1,2,8,9)
+Q10 = data1993$v63
+
+Pays = data1993$v3
+
+BDD1993 = data.frame(Pays,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10)
+summary(BDD1993)
+View(BDD1993)
+
+Age = data2010$AGE
+min(Age)
+max(Age)
+sep=c(15,seq(20,100,by=10),NA)
+Classeage = cut(Age,breaks=sep,include.lowest = TRUE)
+levels(Classeage)
+
+Anneeetudes = data2010$EDUCYRS
+
+levels(data2010$DEGREE)
+levels(data2010$DEGREE) = c(0:5,8,9)
+Niveduc = data2010$DEGREE
+
+levels(data2010$WORK)
+levels(data2010$WORK) = c(0,1,2,3,NA)
+Travail = data2010$WORK
+
+HeuresTravail = data2010$WRKHRS
+
+BDD2010 = data.frame(Sexe,Age,Classeage,Pays,Anneeetudes,Niveduc,Travail,HeuresTravail,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10)
+summary(BDD2010)
+View(BDD2010)
+
+#donnees 2000
+View(data2000)
+
+#2010 = 2000 = 
+#q12a = q7a = q2
+#q12b = q7b = q3
+#q12c = q7c = q4
+#q14a = q10a = q5
+#q20a = q19a = q6
+#q21 = q20 = q7
+#q22a = q21a = q8
+#q22b = q21b = q9
+#q22c = q21c = q10
+
+levels(data2000$v19)
+levels(data2000$v19) = c(0,1,2,3,4,5,8,9)
+Q2 = data2000$v19
+
+levels(data2000$v20)
+levels(data2000$v20) = c(0,1,2,3,4,5,8,9)
+Q3 = data2000$v20
+
+levels(data2000$v21)
+levels(data2000$v21) = c(0,1,2,3,4,5,8,9)
+Q4 = data2000$v21
+
+levels(data2000$v33)
+levels(data2000$v33) = c(0,1,2,3,4,5,8,9)
+Q5 = data2000$v33
+
+levels(data2000$v56)
+levels(data2000$v56) = c(0,1,2,3,4,5,8,9)
+Q6 = data2000$v56
+
+levels(data2000$v58)
+levels(data2000$v58) = c(0,1,2,8,9)
+Q7 = data2000$v58
+
+levels(data2000$v59)
+levels(data2000$v59) = c(0,1,2,8,9)
+Q8 = data2000$v59
+
+levels(data2000$v60)
+levels(data2000$v60) = c(0,1,2,8,9)
+Q9 = data2000$v60
+
+levels(data2000$v61)
+levels(data2000$v61) = c(0,1,2,8,9)
+Q10 = data2000$v61
+
+BDD2000 = data.frame(Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10)
+summary(BDD2000)
+View(BDD2000)
+
+#donnees 2010
+View(data2010)
+
+#2010 = 
+#q6 = q1
+#q12a = q2
+#q12b = q3
+#q12c = q4
+#q14a = q5
+#q20a = q6
+#q21 = q7
+#q22a = q8
+#q22b = q9
+#q22c = q10
+
+levels(data2010$v15)
+levels(data2010$v15) = c(1,2,3,4,5,8,9)
+Q1 = as.numeric(data2010$v15)
+
+levels(data2010$v29)
+levels(data2010$v29) = c(1,2,3,4,5,8,9)
+Q2 = as.numeric(data2010$v29)
+
+levels(data2010$v30)
+levels(data2010$v30) = c(1,2,3,4,5,8,9)
+Q3 = as.numeric(data2010$v30)
+
+levels(data2010$v31)
+levels(data2010$v31) = c(1,2,3,4,5,8,9)
+Q4 = as.numeric(data2010$v31)
+
+levels(data2010$v39)
+levels(data2010$v39) = c(1,2,3,4,5,8,9)
+Q5 = as.numeric(data2010$v39)
+
+levels(data2010$v55)
+levels(data2010$v55) = c(1,2,3,4,8,9)
+Q6 = as.numeric(data2010$v55)
+
+levels(data2010$v61)
+levels(data2010$v61) = c("Yes","No",8,9)
+Q7 = data2010$v61
+
+levels(data2010$v62)
+levels(data2010$v62) = c("Yes","No",8,9)
+Q8 = data2010$v62
+
+levels(data2010$v63)
+levels(data2010$v63) = c("Yes","No",8,9)
+Q9 = data2010$v63
+
+levels(data2010$v64)
+levels(data2010$v64) = c("Yes","No",8,9)
+Q10 = data2010$v64
+
+Pays = data2010$country
+
+levels(data2010$SEX)
+levels(data2010$SEX)= c("H","F",NA)
+Sexe = data2010$SEX
+
+Age = data2010$AGE
+min(Age)
+max(Age)
+sep=c(15,seq(20,100,by=10),NA)
+Classeage = cut(Age,breaks=sep,include.lowest = TRUE)
+levels(Classeage)
+
+Anneeetudes = data2010$EDUCYRS
+
+levels(data2010$DEGREE)
+levels(data2010$DEGREE) = c(0:5,8,9)
+Niveduc = data2010$DEGREE
+
+levels(data2010$WORK)
+levels(data2010$WORK) = c(0,1,2,3,NA)
+Travail = data2010$WORK
+
+HeuresTravail = data2010$WRKHRS
+
+BDD2010 = data.frame(Sexe,Age,Classeage,Pays,Anneeetudes,Niveduc,Travail,HeuresTravail,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10)
+summary(BDD2010)
+View(BDD2010)
+
+nrow(BDD2010)
+
+#BDD2010[BDD2010$Anneeetudes == "98" | BDD2010$Anneeetudes == "99",]=NA
+BDD2010[BDD2010$Age == "999" | BDD2010$Age == "998",]=NA
+BDD2010 = na.omit(BDD2010)
+BDD2010[BDD2010$Q1 == "6" | BDD2010$Q1 == "7",]=NA
+BDD2010 = na.omit(BDD2010)
+BDD2010[BDD2010$Q2 == "6" | BDD2010$Q2 == "7",]=NA
+BDD2010 = na.omit(BDD2010)
+BDD2010[BDD2010$Q3 == "6" | BDD2010$Q3 == "7",]=NA
+BDD2010 = na.omit(BDD2010)
+BDD2010[BDD2010$Q4 == "6" | BDD2010$Q4 == "7",]=NA
+BDD2010 = na.omit(BDD2010)
+BDD2010[BDD2010$Q5 == "6" | BDD2010$Q5 == "7",]=NA
+BDD2010 = na.omit(BDD2010)
+BDD2010[BDD2010$Q6 == "5" | BDD2010$Q6 == "6",]=NA
+BDD2010 = na.omit(BDD2010)
+BDD2010[BDD2010$Q7 == "8" | BDD2010$Q7 == "9",]=NA
+BDD2010 = na.omit(BDD2010)
+BDD2010[BDD2010$Q8 == "8" | BDD2010$Q8 == "9",]=NA
+BDD2010 = na.omit(BDD2010)
+BDD2010[BDD2010$Q9 == "8" | BDD2010$Q9 == "9",]=NA
+BDD2010 = na.omit(BDD2010)
+BDD2010[BDD2010$Q10 == "8" | BDD2010$Q10 == "9",]=NA
+BDD2010 = na.omit(BDD2010)
+summary(BDD2010)
+View(BDD2010)
+
+nrow(BDD2010)
+
+###age
+table(BDD2010$Classeage)
+table(BDD2010$Classeage)/nrow(BDD2010)
+
+#histogramme
+hist(BDD2010$Age,prob=TRUE,ylim=c(0,0.023),main="Histogramme des frequences",xlab="Age",ylab="Frequences")
+
+x = seq(min(BDD2010$Age),max(BDD2010$Age),length=1000)
+y = dnorm(x,mean(BDD2010$Age),sd(BDD2010$Age))
+lines(x,y,col="red")
+
+
+#diagramme cumulatif
+plot(ecdf(BDD2010$Age),main="Diagramme cumulatif des ages",cex=0.2)
+x = seq(min(BDD2010$Age),max(BDD2010$Age),length=1000)
+y = pnorm(x,mean(BDD2010$Age),sd(BDD2010$Age))
+lines(x,y,col="blue")
+
+#jb.norm.test(BDD2010$Age)
+lillie.test(BDD2010$Age)
+#shapiro.test(BDD2010$Age[1:5000])
+#age ne suit pas une loi normale
+
+###sexe
+table(BDD2010$Sexe)
+table(BDD2010$Sexe)/nrow(BDD2010)
+
+#diagramme en tuyau d'orgue
+plot(BDD2010$Sexe,main="Diagramme en tuyaux d'orgue",xlab="Sexe",ylab="Nombre de personnes",
+     xlim=c(0,6),space=1.4)
+
+#diagramme en bande
+barplot(matrix(table(BDD2010$Sexe)),horiz=TRUE,legend=c("H","F"),
+        main="Diagramme en bande")
+
+#diagramme circulaire
+pie(table(BDD2010$Sexe),main="Diagramme circulaire")
+
+###anneetudes
+
+#histogramme
+hist(BDD2010$Anneeetudes,prob=TRUE,xlim=c(0,30),main="Histogramme des frequences",xlab="Années d'études",ylab="Frequences",breaks=50)
+x = seq(min(BDD2010$Anneeetudes),max(BDD2010$Anneeetudes[BDD2010$Anneeetudes <= 30]),length=1000)
+y = dnorm(x,mean(BDD2010$Anneeetudes[BDD2010$Anneeetudes <= 30]),sd(BDD2010$Anneeetudes[BDD2010$Anneeetudes <= 30]))
+lines(x,y,col="red")
+
+#diagramme cumulatif
+plot(ecdf(BDD2010$Anneeetudes[BDD2010$Anneeetudes <= 30]),main="Diagramme cumulatif des années d'études",cex=0.2)
+x = seq(min(BDD2010$Anneeetudes),max(BDD2010$Anneeetudes[BDD2010$Anneeetudes <= 30]),length=1000)
+y = pnorm(x,mean(BDD2010$Anneeetudes[BDD2010$Anneeetudes <= 30]),sd(BDD2010$Anneeetudes[BDD2010$Anneeetudes <= 30]))
+lines(x,y,col="blue")
+
+lillie.test(BDD2010$Anneeetudes[BDD2010$Anneeetudes <= 30])
+
+#anneetudes ne suit pas une loi normale
+
+
+#q1
+table(BDD2010$Q1)
+table(BDD2010$Q1)/nrow(BDD2010)
+
+plot(table(BDD2010$Q1),main="Diagramme en batons pour la question n°1",xlab="Réponse",ylab="Nombre de personnes")
+
+#q2
+table(BDD2010$Q2)
+table(BDD2010$Q2)/nrow(BDD2010)
+
+plot(table(BDD2010$Q2),main="Diagramme en batons pour la question n°2",xlab="Réponse",ylab="Nombre de personnes")
+
+#q3
+table(BDD2010$Q3)
+table(BDD2010$Q3)/nrow(BDD2010)
+
+plot(table(BDD2010$Q3),main="Diagramme en batons pour la question n°3",xlab="Réponse",ylab="Nombre de personnes")
+
+#q4
+table(BDD2010$Q4)
+table(BDD2010$Q4)/nrow(BDD2010)
+
+plot(table(BDD2010$Q4),main="Diagramme en batons pour la question n°4",xlab="Réponse",ylab="Nombre de personnes")
+
+#q5
+table(BDD2010$Q5)
+table(BDD2010$Q5)/nrow(BDD2010)
+
+plot(table(BDD2010$Q5),main="Diagramme en batons pour la question n°5",xlab="Réponse",ylab="Nombre de personnes")
+
+#q6
+table(BDD2010$Q6)
+table(BDD2010$Q6)/nrow(BDD2010)
+
+plot(table(BDD2010$Q6),main="Diagramme en batons pour la question n°6",xlab="Réponse",ylab="Nombre de personnes")
+
+#q7
+table(BDD2010$Q7)
+table(BDD2010$Q7)/nrow(BDD2010)
+
+#diagramme en tuyau d'orgue
+plot(BDD2010$Q7,main="Diagramme en tuyaux d'orgue",ylab="Nombre de personnes",
+     xlim=c(0,3),space=0.435)
+
+#diagramme en bande
+barplot(matrix(table(BDD2010$Q7)),horiz=TRUE,legend=c("Yes","No"),
+        main="Diagramme en bande")
+
+#diagramme circulaire
+pie(table(BDD2010$Q7),main="Diagramme circulaire")
+
+#q8
+table(BDD2010$Q8)
+table(BDD2010$Q8)/nrow(BDD2010)
+
+#diagramme en tuyau d'orgue
+plot(BDD2010$Q8,main="Diagramme en tuyaux d'orgue",ylab="Nombre de personnes",
+     xlim=c(0,3),space=0.435)
+
+#diagramme en bande
+barplot(matrix(table(BDD2010$Q8)),horiz=TRUE,legend=c("Yes","No"),
+        main="Diagramme en bande")
+
+#diagramme circulaire
+pie(table(BDD2010$Q8),main="Diagramme circulaire")
+
+#q9
+table(BDD2010$Q9)
+table(BDD2010$Q9)/nrow(BDD2010)
+
+#diagramme en tuyau d'orgue
+plot(BDD2010$Q9,main="Diagramme en tuyaux d'orgue",ylab="Nombre de personnes",
+     xlim=c(0,3),space=0.435)
+
+#diagramme en bande
+barplot(matrix(table(BDD2010$Q9)),horiz=TRUE,legend=c("Yes","No"),
+        main="Diagramme en bande")
+
+#diagramme circulaire
+pie(table(BDD2010$Q9),main="Diagramme circulaire")
+
+#q10
+table(BDD2010$Q10)
+table(BDD2010$Q10)/nrow(BDD2010)
+
+#diagramme en tuyau d'orgue
+plot(BDD2010$Q10,main="Diagramme en tuyaux d'orgue",ylab="Nombre de personnes",
+     xlim=c(0,3),space=0.435)
+
+#diagramme en bande
+barplot(matrix(table(BDD2010$Q10)),horiz=TRUE,legend=c("Yes","No"),
+        main="Diagramme en bande")
+
+#diagramme circulaire
+pie(table(BDD2010$Q10),main="Diagramme circulaire")
+
+
+
+###pays
+table(BDD2010$Pays)
+table(BDD2010$Pays)/nrow(BDD2010)
+
+hist(BDD2010$Q1)
+
+tapply(BDD2010$Age,BDD2010$Q1,mean)
+tapply(BDD2010$Age,BDD2010$Q2,mean)
+tapply(BDD2010$Age,BDD2010$Q3,mean)
+tapply(BDD2010$Age,BDD2010$Q4,mean)
+tapply(BDD2010$Age,BDD2010$Q5,mean)
+tapply(BDD2010$Age,BDD2010$Q6,mean)
+tapply(BDD2010$Age,BDD2010$Q7,mean)
+tapply(BDD2010$Age,BDD2010$Q8,mean)
+tapply(BDD2010$Age,BDD2010$Q9,mean)
+tapply(BDD2010$Age,BDD2010$Q10,mean)
+
+
+tapply(BDD2010$Q1,BDD2010$Pays,mean)
+min(tapply(BDD2010$Q1,BDD2010$Pays,mean))
+max(tapply(BDD2010$Q1,BDD2010$Pays,mean))
+
+tapply(BDD2010$Q2,BDD2010$Pays,mean)
+min(tapply(BDD2010$Q2,BDD2010$Pays,mean))
+max(tapply(BDD2010$Q2,BDD2010$Pays,mean))
+
+#_____________________________________________
+
+
+levels(BDD2010$Pays)
+continent = c("South America","Oceania","Europe","Europe","Europe","North America","South America","Asia","Europe","Europe","Europe","Europe","Europe","Europe","Europe","Asia",
+              "Asia","Asia","Europe","Europe","North America","Europe","Oceania","Europe","Asia","Europe","Asia","Europe","Europe","Africa","Europe","Europe","Europe","Europe","Europe","North America")
+BDD2010$Continent = BDD2010$Pays
+levels(BDD2010$Continent)= continent
+
+tapply(BDD2010$Q1,BDD2010$Continent,mean)
+min(tapply(BDD2010$Q1,BDD2010$Continent,mean))
+max(tapply(BDD2010$Q1,BDD2010$Continent,mean))
+
+tapply(BDD2010$Q2,BDD2010$Continent,mean)
+min(tapply(BDD2010$Q2,BDD2010$Continent,mean))
+max(tapply(BDD2010$Q2,BDD2010$Continent,mean))
+
+#Boxplot pour chaque continent
+par(mfrow = c(2,3))
+boxplot(Q1~Continent,data=BDD2010,main="Q1")
+boxplot(Q2~Continent,data=BDD2010,main="Q2")
+boxplot(Q3~Continent,data=BDD2010,main="Q3")
+boxplot(Q4~Continent,data=BDD2010,main="Q4")
+boxplot(Q5~Continent,data=BDD2010,main="Q5")
+boxplot(Q6~Continent,data=BDD2010,main="Q6")
+
+
+
+
+par(mfrow = c(2,2))
+barplot(table(BDD2010$Q7,BDD2010$Continent),legend=c("Y","N"),main="Diagramme en bande",ylab="Effectif Q7")
+barplot(table(BDD2010$Q8,BDD2010$Continent),legend=c("Y","N"),main="Diagramme en bande",ylab="Effectif Q8")
+barplot(table(BDD2010$Q9,BDD2010$Continent),legend=c("Y","N"),main="Diagramme en bande",ylab="Effectif Q9")
+barplot(table(BDD2010$Q10,BDD2010$Continent),legend=c("Y","N"),main="Diagramme en bande",ylab="Effectif Q10")
